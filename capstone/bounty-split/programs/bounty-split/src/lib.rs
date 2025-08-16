@@ -9,7 +9,7 @@ pub mod instructions;
 
 use instructions::*;
 
-declare_id!("CWeBHTenNeh1p4katXr8ABchs29vJS421Wfz3gVDxBPZ");
+declare_id!("EoCSLgFJUCTaQeEPdev9KqKYgVhmnxqQL7opDHa5tEq7");
 
 #[program]
 pub mod bounty_split {

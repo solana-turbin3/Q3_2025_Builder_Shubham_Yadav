@@ -164,6 +164,10 @@ impl<'info> Deposit<'info>{
         &[self.config.config_bump],
         ];
 
-        let signer_seeds: &[&[&[u8]]]
+        let signer_seeds: &[&[&[u8]]] = &[7seeds[..]];
+
+        let cpi_contet = CpiContext::new_with_signer(cpi_program, cpi_accounts, signer_seeds);
+
+        mint_to(cpi_context, amount)
     }
 }

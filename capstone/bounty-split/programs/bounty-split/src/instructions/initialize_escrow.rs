@@ -58,19 +58,31 @@ pub fn initialize_escrow(ctx: Context<InitializeEscrow>, params: InitializeParam
     require!(splits.len() == rcount, EscrowError::InvalidSplits);
     require!(params.required_confirmations >= 1 && (params.required_confirmations as usize) <= rcount, EscrowError::InvalidRecipientCount);
 
-    // Duplicate recipient check
-    for i in 0..rcount { for j in (i+1)..rcount { require!(recipients[i] != recipients[j], EscrowError::DuplicateRecipient); } }
+    // Duplicate recipient check (simplified)
+    for i in 0..rcount {
+        for j in (i+1)..rcount {
+            require!(recipients[i] != recipients[j], EscrowError::DuplicateRecipient);
+        }
+    }
 
     // Splits: no zero, sum exact
     let mut sum: u32 = 0;
-    for s in splits { require!(*s > 0, EscrowError::ZeroSplit); sum = sum.checked_add(*s as u32).ok_or(error!(EscrowError::InvalidSplits))?; }
+    for s in splits {
+        require!(*s > 0, EscrowError::ZeroSplit);
+        sum = sum.checked_add(*s as u32).ok_or(error!(EscrowError::InvalidSplits))?;
+    }
     require!(sum == BASIS_POINTS_DENOM as u32, EscrowError::InvalidSplits);
 
     // Timelock validation
-    if params.timelock_expiry != 0 { let now = Clock::get()?.unix_timestamp; require!(params.timelock_expiry > now, EscrowError::InvalidTimelock); }
+    if params.timelock_expiry != 0 {
+        let now = Clock::get()?.unix_timestamp;
+        require!(params.timelock_expiry > now, EscrowError::InvalidTimelock);
+    }
 
     // Arbiter sanity (optional rule: cannot equal requester unless default)
-    if params.arbiter != Pubkey::default() { require!(params.arbiter != ctx.accounts.requester.key(), EscrowError::InvalidArbiter); }
+    if params.arbiter != Pubkey::default() {
+        require!(params.arbiter != ctx.accounts.requester.key(), EscrowError::InvalidArbiter);
+    }
 
     // Populate escrow
     escrow.requester = ctx.accounts.requester.key();
@@ -81,7 +93,10 @@ pub fn initialize_escrow(ctx: Context<InitializeEscrow>, params: InitializeParam
     escrow.recipient_count = rcount as u8;
 
     // Copy recipients & splits (account is zeroed on init so no manual clearing needed)
-    for (i, pk) in recipients.iter().enumerate() { escrow.recipients[i] = *pk; escrow.splits[i] = splits[i]; }
+    for (i, pk) in recipients.iter().enumerate() {
+        escrow.recipients[i] = *pk;
+        escrow.splits[i] = splits[i];
+    }
 
     escrow.confirmations = 0;
     escrow.status = STATUS_INITIALIZED;
