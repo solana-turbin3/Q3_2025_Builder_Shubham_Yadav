@@ -15,9 +15,11 @@ This record logs program address, deployment info, and useful explorer links.
 ---
 
 ## 2. 📦 Program Details
-| Program Name        | Program ID                                   | Deployed By      |
-|---------------------|--------------------------------------- ---  -----------------|
-| YourProgramName     | EoCSLgFJUCTaQeEPdev9KqKYgVhmnxqQL7opDHa5tEq7 | Shubham   |
+
+| Program Name    | Program ID                                   | Deployed By |
+|-----------------|----------------------------------------------|-------------|
+| Solan-bounty-split | EoCSLgFJUCTaQeEPdev9KqKYgVhmnxqQL7opDHa5tEq7 | Shubham     |
+
 
 ---
 
