@@ -18,7 +18,7 @@ This record logs program address, deployment info, and useful explorer links.
 
 | Program Name    | Program ID                                   | Deployed By |
 |-----------------|----------------------------------------------|-------------|
-| Solan-bounty-split | EoCSLgFJUCTaQeEPdev9KqKYgVhmnxqQL7opDHa5tEq7 | Shubham     |
+| Solana-bounty-split | EoCSLgFJUCTaQeEPdev9KqKYgVhmnxqQL7opDHa5tEq7 | Shubham     |
 
 
 ---
